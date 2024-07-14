@@ -53,7 +53,7 @@ android {
         }
         prod {
             dimension "flavorDimension"
-            resValue "string", "app_name", "Agendamento[PROD]"
+            resValue "string", "app_name", "Agendamento"
         }
     }
 
