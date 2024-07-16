@@ -9,8 +9,8 @@ class AuthRepository {
 
   Future<Result<LoginFailedResult, User>> login({required String email, required String password}) async  {
     final result = await _dataSource.login(email: email, password: password);
-    if (result case Failure(error: final error)) {
-      print(error);
+    if (result case Failure(error: final _)) {
+      
     }
     return result;
   }
