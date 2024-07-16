@@ -1,8 +1,9 @@
-import 'package:app_agendamento/core/helpers/result.dart';
-import 'package:app_agendamento/features/auth/data/results/login_failed_result.dart';
-import 'package:app_agendamento/features/auth/models/user.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../../../core/helpers/result.dart';
+import '../../../features/auth/data/results/login_failed_result.dart';
+import '../../../features/auth/models/user.dart';
 
 class AuthDatasource {
   final Dio _dio = Dio(
