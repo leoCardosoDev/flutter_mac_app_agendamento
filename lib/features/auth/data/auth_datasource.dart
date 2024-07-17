@@ -1,3 +1,4 @@
+import 'package:app_agendamento/core/helpers/token_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -14,7 +15,10 @@ class AuthDatasource {
         'X-Parse-REST-API-Key': 'M7zGDkCPUn1fAbbBMtgZIhxmeB1E1EIZNZV4sedd'
       }
     )
-  )..interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
+  )..interceptors.addAll([
+        TokenInterceptor(),
+        PrettyDioLogger(requestHeader: true, requestBody: true)
+    ]);
 
   Future<Result<LoginFailedResult, User>> login({required String email, required String password}) async {
     try {
