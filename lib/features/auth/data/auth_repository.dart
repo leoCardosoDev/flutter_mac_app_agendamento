@@ -3,14 +3,14 @@ import '../models/user.dart';
 import './results/login_failed_result.dart';
 import './auth_datasource.dart';
 
-
 class AuthRepository {
   final AuthDatasource _dataSource = AuthDatasource();
-
-  Future<Result<LoginFailedResult, User>> login({required String email, required String password}) async  {
+  User? user;
+  Future<Result<LoginFailedResult, User>> login(
+      {required String email, required String password}) async {
     final result = await _dataSource.login(email: email, password: password);
-    if (result case Failure(error: final _)) {
-      
+    if (result case Success(object: final user)) {
+      this.user = user;
     }
     return result;
   }
