@@ -4,7 +4,9 @@ import './results/login_failed_result.dart';
 import './auth_datasource.dart';
 
 class AuthRepository {
-  final AuthDatasource _dataSource = AuthDatasource();
+  final AuthDataSource _dataSource;
+
+  AuthRepository(this._dataSource);
   User? user;
   Future<Result<LoginFailedResult, User>> login(
       {required String email, required String password}) async {

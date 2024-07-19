@@ -1,11 +1,13 @@
+import 'package:app_agendamento/core/helpers/result.dart';
 import 'package:flutter/material.dart';
-
+import 'core/di/di.dart';
 import 'core/flavor/flavor_config.dart';
-import 'core/helpers/result.dart';
 import 'core/routes/app_routes.dart';
 import 'features/auth/data/auth_repository.dart';
 
-void bootstrap(FlavorConfig config) {
+Future<void> bootstrap(FlavorConfig config) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies(config);
   runApp(const App());
 }
 
@@ -24,13 +26,14 @@ class _AppState extends State<App> {
   }
 
   Future<void> initialize() async {
-    final AuthRepository authRepository = AuthRepository();
-    final result = await authRepository.login(email: 'leosilva@gmail.com', password: '12345678');
-    switch(result) {
+    final AuthRepository authRepository = getIt();
+    final result = await authRepository.login(
+        email: 'leocardoso@gmail.com', password: '12345678');
+    switch (result) {
       case Success(object: final user):
-        debugPrint('Success ${user.id}');
+        debugPrint('Successo: ${user.id}');
       case Failure(error: final error):
-        debugPrint(error.name);
+        debugPrint('App $error');
     }
   }
 
