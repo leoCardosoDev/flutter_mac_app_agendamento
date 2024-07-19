@@ -1,6 +1,6 @@
 name: app_agendamento
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   dio:
   pretty_dio_logger:
   get_it: ^7.7.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
