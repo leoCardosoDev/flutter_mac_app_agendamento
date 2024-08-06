@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDh4t6Z_5TgRsCq7KU6OQt-fhYMVazJqyc',
-    appId: '1:419772878304:android:312619c6b0ea9da9992f85',
+    appId: '1:419772878304:android:3c1a2bbdc5dfb156992f85',
     messagingSenderId: '419772878304',
     projectId: 'app-aggendamento',
     storageBucket: 'app-aggendamento.appspot.com',

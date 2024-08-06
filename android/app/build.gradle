@@ -74,3 +74,4 @@ android {
 flutter {
     source = "../.."
 }
+apply plugin: 'com.google.firebase.crashlytics'
