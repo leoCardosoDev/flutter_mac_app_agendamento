@@ -5,8 +5,15 @@ import 'core/flavor/flavor_config.dart';
 import 'core/routes/app_routes.dart';
 import 'features/auth/data/auth_repository.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
 Future<void> bootstrap(FlavorConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await configureDependencies(config);
   runApp(const App());
 }
