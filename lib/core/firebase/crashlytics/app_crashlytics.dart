@@ -16,7 +16,6 @@ class AppCrashlytics {
       _crashlytics.recordFlutterError(error);
     };
 
-    _crashlytics.crash();
     PlatformDispatcher.instance.onError = (error, stack) {
       _crashlytics.recordError(error, stack, fatal: true);
       return true;
