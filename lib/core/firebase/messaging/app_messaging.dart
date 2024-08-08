@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/widgets.dart';
 
 class AppMessaging {
   final FirebaseMessaging _messaging;
@@ -9,23 +10,23 @@ class AppMessaging {
   Future<void> _configureMessaging() async {
     await _messaging.requestPermission();
     final token = await _messaging.getToken();
-    print('TOKEN => $token');
+    debugPrint('TOKEN => $token');
 
     FirebaseMessaging.onMessage.listen((message) {
-      print(message.data);
+      debugPrint('${message.data}');
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Navegar para a ${message.data['page']}');
+      debugPrint('Navegar para a ${message.data['page']}');
     });
 
     final message = await _messaging.getInitialMessage();
-    print('DESLIGADO: ${message?.data}');
+    debugPrint('DESLIGADO: ${message?.data}');
   }
 }
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print("Handling a background message: ${message.messageId}");
+  debugPrint("Handling a background message: ${message.messageId}");
 }
