@@ -14,11 +14,20 @@ dependencies:
   pretty_dio_logger:
   get_it: ^7.7.0
   shared_preferences: ^2.2.3
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  equatable:
+  firebase_core: ^2.24.2
+  firebase_analytics: ^10.8.0
+  firebase_crashlytics: ^3.4.9
+  firebase_messaging: ^14.7.10
+  firebase_remote_config: ^4.3.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  bloc_test: ^9.1.7
 
 flutter:
   uses-material-design: true
