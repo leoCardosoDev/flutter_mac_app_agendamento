@@ -25,6 +25,9 @@ class AppRemoteConfig {
           AppRemoteConfigKeys.maintenance.defaultValue,
     });
     await _remoteConfig.fetchAndActivate();
+    _remoteConfig.onConfigUpdated.listen((event) async {
+      await _remoteConfig.activate();
+    });
   }
 
   int get appMinVersion =>
