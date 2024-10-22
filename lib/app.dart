@@ -13,6 +13,7 @@ Future<void> bootstrap(FlavorConfig config) async {
   );
 
   await configureDependencies(config);
+  await Future.delayed(const Duration(seconds: 10));
   runApp(const App());
 }
 

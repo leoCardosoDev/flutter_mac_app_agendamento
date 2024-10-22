@@ -1,3 +1,4 @@
+import 'package:app_agendamento/features/splash/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -8,14 +9,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => Scaffold(
-        body: Center(
-          child: TextButton(
-                  onPressed: () => throw Exception(),
-                  child: const Text("Throw Test Exception"),
-                ),
-        ),
-      ),
+      builder: (context, state) => const SplashPage(),
     ),
     GoRoute(
       path: '/auth',
