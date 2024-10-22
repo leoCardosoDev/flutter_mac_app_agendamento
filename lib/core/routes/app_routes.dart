@@ -8,7 +8,14 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => Container(),
+      builder: (context, state) => Scaffold(
+        body: Center(
+          child: TextButton(
+                  onPressed: () => throw Exception(),
+                  child: const Text("Throw Test Exception"),
+                ),
+        ),
+      ),
     ),
     GoRoute(
       path: '/auth',
