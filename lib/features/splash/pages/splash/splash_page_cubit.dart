@@ -17,9 +17,18 @@ class SplashPageCubit extends Cubit<SplashPageState> {
   final AppPackageInfo _appPackageInfo;
 
   Future<void> initialize() async {
-    await Future.wait([
+    final results = await Future.wait([
       _initRemoteConfig(),
     ]);
+
+    switch (results[0]) {
+      case AppStatus.available:
+        break;
+      case AppStatus.forceUpdate:
+        break;
+      case AppStatus.maintenance:
+        break;
+    }
   }
 
   Future<AppStatus> _initRemoteConfig() async {
