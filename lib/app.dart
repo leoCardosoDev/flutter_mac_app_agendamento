@@ -13,7 +13,6 @@ Future<void> bootstrap(FlavorConfig config) async {
   );
 
   await configureDependencies(config);
-  await Future.delayed(const Duration(seconds: 10));
   runApp(const App());
 }
 
@@ -28,6 +27,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
     );
   }

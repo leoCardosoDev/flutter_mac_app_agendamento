@@ -1,8 +1,11 @@
+import 'package:app_agendamento/core/device/app_package_info.dart';
 import 'package:app_agendamento/core/firebase/crashlytics/app_crashlytics.dart';
 import 'package:app_agendamento/core/firebase/messaging/app_messaging.dart';
+import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,4 +36,7 @@ Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerSingleton(AppCrashlytics(getIt()));
   getIt.registerLazySingleton(() => FirebaseMessaging.instance);
   getIt.registerSingleton(AppMessaging(getIt()));
+  getIt.registerLazySingleton(() => FirebaseRemoteConfig.instance);
+  getIt.registerSingleton(AppRemoteConfig(getIt()));
+  getIt.registerFactory(() => AppPackageInfo());
 }
