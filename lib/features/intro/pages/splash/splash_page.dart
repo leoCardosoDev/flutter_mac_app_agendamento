@@ -1,6 +1,6 @@
+import 'package:app_agendamento/features/intro/pages/splash/splash_page_actions.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page_cubit.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -10,8 +10,8 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  final SplashPageCubit cubit = SplashPageCubit();
+class _SplashPageState extends State<SplashPage> implements SplashPageActions {
+  late final SplashPageCubit cubit = SplashPageCubit(this);
   @override
   void initState() {
     super.initState();
@@ -20,22 +20,28 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: cubit,
-      child: BlocListener<SplashPageCubit, SplashPageState>(
-        listener: (context, state) {
-          if (state.status == SplashPageStatus.goToOnboarding) {
-            context.push('/onboarding');
-          }
-        },
-        child: const Scaffold(
-          body: Center(
-            child: FlutterLogo(
-              size: 200,
-            ),
-          ),
+    return const Scaffold(
+      body: Center(
+        child: FlutterLogo(
+          size: 200,
         ),
       ),
     );
+  }
+
+  @override
+  void navToMaintanence() {
+    context.push('/onboarding');
+  }
+
+  @override
+  void navToOnboarding() {
+    context.push('/onboarding');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    cubit.dispose();
   }
 }
