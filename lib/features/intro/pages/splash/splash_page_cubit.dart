@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/device/app_package_info.dart';
+import 'package:app_agendamento/core/device/app_preferences.dart';
 import 'package:app_agendamento/core/di/di.dart';
 import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.dart';
 import 'package:bloc/bloc.dart';
@@ -8,26 +9,32 @@ part 'splash_page_state.dart';
 
 class SplashPageCubit extends Cubit<SplashPageState> {
   SplashPageCubit(
-      {AppRemoteConfig? appRemoteConfig, AppPackageInfo? appPackageInfo})
+      {AppRemoteConfig? appRemoteConfig,
+      AppPackageInfo? appPackageInfo,
+      AppPreferences? appPreferences})
       : _appRemoteConfig = appRemoteConfig ?? getIt(),
         _appPackageInfo = appPackageInfo ?? getIt(),
-        super(SplashPageInitial());
+        _appPreferences = appPreferences ?? getIt(),
+        super(const SplashPageState());
 
   final AppRemoteConfig _appRemoteConfig;
   final AppPackageInfo _appPackageInfo;
+  final AppPreferences _appPreferences;
 
   Future<void> initialize() async {
     final results = await Future.wait([
       _initRemoteConfig(),
+      Future.delayed(const Duration(seconds: 2)),
     ]);
 
-    switch (results[0]) {
-      case AppStatus.available:
-        break;
-      case AppStatus.forceUpdate:
-        break;
-      case AppStatus.maintenance:
-        break;
+    if (results[0] == AppStatus.maintenance) {
+      return;
+    } else if (results[0] == AppStatus.forceUpdate) {
+      return;
+    }
+    final shouldShowOnboarding = _appPreferences.shouldShowOnboarding;
+    if (shouldShowOnboarding) {
+      emit(state.copyWith(status: SplashPageStatus.goToOnboarding));
     }
   }
 

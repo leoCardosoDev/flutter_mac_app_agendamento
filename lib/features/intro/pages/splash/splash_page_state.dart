@@ -1,10 +1,22 @@
 part of 'splash_page_cubit.dart';
 
-sealed class SplashPageState extends Equatable {
-  const SplashPageState();
-
-  @override
-  List<Object> get props => [];
+enum SplashPageStatus {
+  loading,
+  goToOnboarding,
+  goToForceUpdate,
+  goToMaintenance
 }
 
-final class SplashPageInitial extends SplashPageState {}
+class SplashPageState extends Equatable {
+  final SplashPageStatus status;
+  const SplashPageState({this.status = SplashPageStatus.loading});
+
+  @override
+  List<Object> get props => [status];
+
+  SplashPageState copyWith({
+    SplashPageStatus? status,
+  }) {
+    return SplashPageState(status: status ?? this.status);
+  }
+}

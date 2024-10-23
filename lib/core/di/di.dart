@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/device/app_package_info.dart';
+import 'package:app_agendamento/core/device/app_preferences.dart';
 import 'package:app_agendamento/core/firebase/crashlytics/app_crashlytics.dart';
 import 'package:app_agendamento/core/firebase/messaging/app_messaging.dart';
 import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.dart';
@@ -30,6 +31,7 @@ Future<void> configureDependencies(FlavorConfig config) async {
     ]));
   final preferences = await SharedPreferences.getInstance();
   getIt.registerSingleton(preferences);
+  getIt.registerFactory(() => AppPreferences(getIt()));
   getIt.registerFactory<AuthDataSource>(() => RemoteAuthDataSource(getIt()));
   getIt.registerLazySingleton(() => AuthRepository(getIt()));
   getIt.registerLazySingleton(() => FirebaseCrashlytics.instance);
