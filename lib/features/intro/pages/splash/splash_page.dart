@@ -1,4 +1,4 @@
-import 'package:app_agendamento/features/splash/pages/splash/splash_page_cubit.dart';
+import 'package:app_agendamento/features/intro/pages/splash/splash_page_cubit.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 

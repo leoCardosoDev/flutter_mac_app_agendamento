@@ -1,4 +1,4 @@
-import 'package:app_agendamento/features/splash/pages/splash/splash_page.dart';
+import 'package:app_agendamento/features/intro/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
