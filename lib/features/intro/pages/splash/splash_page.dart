@@ -40,6 +40,16 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
   }
 
   @override
+  void navToAuth() {
+    context.push('/auth');
+  }
+
+  @override
+  void navToHome() {
+    context.push('/home');
+  }
+
+  @override
   void dispose() {
     super.dispose();
     cubit.dispose();
