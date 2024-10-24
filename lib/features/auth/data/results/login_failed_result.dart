@@ -1,6 +1,1 @@
-enum LoginFailedResult {
-  invalidCredentials,
-  offline,
-  unknowError,
-  userNotActive
-}
+enum LoginFailed { invalidCredentials, offline, unknownError, userNotActive }

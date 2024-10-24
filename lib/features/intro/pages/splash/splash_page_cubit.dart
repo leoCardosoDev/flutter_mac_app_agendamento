@@ -26,11 +26,11 @@ class SplashPageCubit extends Cubit<SplashPageState> {
   Future<void> initialize() async {
     final results = await Future.wait([
       _initRemoteConfig(),
+      _checkLoggedUser(),
       Future.delayed(const Duration(seconds: 2)),
     ]);
 
     if (_actions == null) return;
-
     if (results[0] == AppStatus.maintenance) {
       return;
     } else if (results[0] == AppStatus.forceUpdate) {
@@ -54,6 +54,8 @@ class SplashPageCubit extends Cubit<SplashPageState> {
       return AppStatus.available;
     }
   }
+
+  Future<void> _checkLoggedUser() async {}
 
   void dispose() {
     _actions = null;
