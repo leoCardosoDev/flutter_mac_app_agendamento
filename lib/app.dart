@@ -34,8 +34,8 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         routerConfig: router,
         theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.white,
-        ),
+            scaffoldBackgroundColor: Colors.white,
+            textButtonTheme: const TextButtonThemeData()),
       ),
     );
   }

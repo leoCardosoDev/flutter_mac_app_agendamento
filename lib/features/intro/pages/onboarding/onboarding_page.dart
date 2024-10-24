@@ -1,6 +1,5 @@
-import 'package:app_agendamento/core/theme/app_theme.dart';
+import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -12,7 +11,6 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
     return Scaffold(
       body: Column(
         children: [
@@ -21,18 +19,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 44),
             child: Row(
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateColor.resolveWith((states) {
-                      if (states.contains(WidgetState.pressed)) {
-                        return Colors.blueAccent;
-                      }
-                      return theme.primaryColor;
-                    }),
+                Expanded(
+                  child: AppElevatedButton(
+                    label: 'Continuar',
+                    iconPath: 'assets/icons/arrow_right.svg',
+                    onPressed: () {},
                   ),
-                  child: const Text('Continuar'),
-                )
+                ),
               ],
             ),
           ),
