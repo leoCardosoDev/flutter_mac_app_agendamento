@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
+import 'package:app_agendamento/core/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -19,6 +20,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 44),
             child: Row(
               children: [
+                AppTextButton(label: 'Voltar', onPressed: () {}),
+                const SizedBox(width: 16),
                 Expanded(
                   child: AppElevatedButton(
                     label: 'Continuar',
