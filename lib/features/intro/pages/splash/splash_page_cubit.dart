@@ -37,8 +37,10 @@ class SplashPageCubit extends Cubit<SplashPageState> {
     final appStatus = results[0];
     if (_actions == null) return;
     if (appStatus == AppStatus.maintenance) {
+      _actions?.navToMaintanence();
       return;
     } else if (appStatus == AppStatus.forceUpdate) {
+      _actions?.navToForceUpadte();
       return;
     }
     final shouldShowOnboarding = _appPreferences.shouldShowOnboarding;

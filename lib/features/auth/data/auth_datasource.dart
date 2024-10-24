@@ -37,7 +37,10 @@ class RemoteAuthDataSource implements AuthDataSource {
   @override
   Future<Result<ValidateTokenFailed, User>> validateToken(String token) async {
     try {
-      final response = await _dio.post('/v1-get-user');
+      final response = await _dio.post('/v1-get-user',
+          options: Options(headers: {
+            'x-parse-session-token': token,
+          }));
       return Success(User.fromMap(response.data['result']));
     } on DioException {
       return const Failure(ValidateTokenFailed.invalidToken);

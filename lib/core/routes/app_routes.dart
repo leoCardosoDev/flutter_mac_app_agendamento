@@ -7,7 +7,7 @@ final router = GoRouter(
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
-      path: '/',
+      path: AppRoutes.splash,
       builder: (context, state) => const SplashPage(),
     ),
     GoRoute(
@@ -16,3 +16,8 @@ final router = GoRouter(
     ),
   ],
 );
+
+class AppRoutes {
+  static String get splash => '/';
+  static String get onboarding => '/onboarding';
+}

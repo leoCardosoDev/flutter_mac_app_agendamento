@@ -1,3 +1,4 @@
+import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page_actions.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page_cubit.dart';
 import "package:flutter/material.dart";
@@ -31,22 +32,27 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToMaintanence() {
-    context.push('/onboarding');
+    context.go('/maintanence');
   }
 
   @override
   void navToOnboarding() {
-    context.push('/onboarding');
+    context.go(AppRoutes.onboarding);
   }
 
   @override
   void navToAuth() {
-    context.push('/auth');
+    context.go('/auth');
   }
 
   @override
   void navToHome() {
-    context.push('/home');
+    context.go('/home');
+  }
+
+  @override
+  void navToForceUpadte() {
+    context.go('/force-upadte');
   }
 
   @override
