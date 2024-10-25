@@ -20,7 +20,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   int page = 0;
   final pages = [
     OnboardingPageInfo(
-      title: 'Acesso a\nlocalização',
+      title: 'Acesso à\nlocalização',
       description: 'Para facilitar a busca de profissionais em sua região',
       imagePath: 'assets/onboarding/onboarding_0.svg',
     ),
@@ -55,29 +55,38 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(p.imagePath),
-                        const SizedBox(height: 60),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            p.title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.w700,
-                              color: theme.black,
-                            ),
+                        Expanded(flex: 2, child: SvgPicture.asset(p.imagePath)),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  p.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.w700,
+                                    color: theme.black,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 25),
+                              SizedBox(
+                                width: 300,
+                                child: Text(
+                                  p.description,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Text(
-                          p.description,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
                       ],
                     ),
                   ),
