@@ -20,6 +20,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   int page = 0;
   final pages = [
     OnboardingPageInfo(
+      title: 'Seja bem-vindo(a)!',
+      description:
+          'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
+      imagePath: 'assets/onboarding/onboarding_2.svg',
+    ),
+    OnboardingPageInfo(
       title: 'Acesso à\nlocalização',
       description: 'Para facilitar a busca de profissionais em sua região',
       imagePath: 'assets/onboarding/onboarding_0.svg',
