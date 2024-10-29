@@ -1,10 +1,13 @@
+import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/cubit/onboarding_page_cubit.dart';
+import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
 import 'package:app_agendamento/core/widgets/app_text_button.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_theme.dart';
 
@@ -15,9 +18,10 @@ class OnboardingPage extends StatefulWidget {
   State<OnboardingPage> createState() => _OnboardingPageState();
 }
 
-class _OnboardingPageState extends State<OnboardingPage> {
+class _OnboardingPageState extends State<OnboardingPage>
+    implements OnboardingPageActions {
   final PageController _pageController = PageController();
-  final OnboardingPageCubit cubit = OnboardingPageCubit();
+  late final OnboardingPageCubit cubit = OnboardingPageCubit(this);
   int page = 0;
 
   @override
@@ -55,13 +59,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   description:
                       'Para receber avisos importantes sobre os seus agendamentos.',
                   imagePath: 'assets/onboarding/onboarding_1.svg',
-                  //onNextPressed: cubit.requestNotificationPermission,
+                  onNextPressed: cubit.requestNotificationPermission,
                 ),
               OnboardingPageInfo(
                 title: 'Agende uma\nconsulta',
                 description:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
                 imagePath: 'assets/onboarding/onboarding_2.svg',
+                onNextPressed: cubit.finish,
               ),
             ];
             return Column(
@@ -164,7 +169,26 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   @override
+  Future<void> showDeniedForeverDialog() {
+    return showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              content: Container(
+                color: Colors.red,
+                width: 100,
+                height: 100,
+              ),
+            ));
+  }
+
+  @override
+  void navToAuth() {
+    context.go(AppRoutes.auth);
+  }
+
+  @override
   void dispose() {
+    cubit.dispose();
     cubit.close();
     _pageController.dispose();
     super.dispose();

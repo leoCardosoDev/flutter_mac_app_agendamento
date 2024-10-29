@@ -8,8 +8,18 @@ class AppMessaging {
 
   Future<AppMessagingStatus> checkStatus() async {
     final settings = await _messaging.getNotificationSettings();
-    settings.authorizationStatus == AuthorizationStatus.authorized;
-    switch (settings.authorizationStatus) {
+    return settings.authorizationStatus.toApp();
+  }
+
+  Future<AppMessagingStatus> requestPermission() async {
+    final settings = await _messaging.requestPermission();
+    return settings.authorizationStatus.toApp();
+  }
+}
+
+extension AuthorizationStatusX on AuthorizationStatus {
+  AppMessagingStatus toApp() {
+    switch (this) {
       case AuthorizationStatus.authorized || AuthorizationStatus.provisional:
         return AppMessagingStatus.allowed;
       case AuthorizationStatus.denied:
