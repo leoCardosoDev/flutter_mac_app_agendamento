@@ -44,6 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                 description:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
                 imagePath: 'assets/onboarding/onboarding_2.svg',
+                nextButtonLabel: 'Vamos começar?',
               ),
               if (state.showLocationPage)
                 OnboardingPageInfo(
@@ -67,6 +68,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
                 imagePath: 'assets/onboarding/onboarding_2.svg',
                 onNextPressed: cubit.finish,
+                nextButtonLabel: 'Finalizar',
               ),
             ];
             return Column(
@@ -145,7 +147,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                       ],
                       Expanded(
                         child: AppElevatedButton(
-                          label: 'Continuar',
+                          label: pages[page].nextButtonLabel ?? 'Próximo',
                           iconPath: 'assets/icons/arrow_right.svg',
                           onPressed: () async {
                             await pages[page].onNextPressed?.call();
@@ -200,11 +202,13 @@ class OnboardingPageInfo {
   final String description;
   final String imagePath;
   final Function? onNextPressed;
+  final String? nextButtonLabel;
 
   OnboardingPageInfo({
     required this.title,
     required this.description,
     required this.imagePath,
     this.onNextPressed,
+    this.nextButtonLabel,
   });
 }
