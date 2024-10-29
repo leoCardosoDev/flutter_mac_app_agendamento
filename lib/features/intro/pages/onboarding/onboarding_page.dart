@@ -32,40 +32,42 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return BlocProvider.value(
       value: cubit,
       child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: BlocBuilder<OnboardingPageCubit, OnboardingPageState>(
-                builder: (context, state) {
-                  final pages = [
-                    OnboardingPageInfo(
-                      title: 'Seja bem-vindo(a)!',
-                      description:
-                          'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
-                      imagePath: 'assets/onboarding/onboarding_2.svg',
-                    ),
-                    if (state.showLocationPage)
-                      OnboardingPageInfo(
-                        title: 'Acesso à\nlocalização',
-                        description:
-                            'Para facilitar a busca de profissionais em sua região',
-                        imagePath: 'assets/onboarding/onboarding_0.svg',
-                      ),
-                    if (state.showNotificationPage)
-                      OnboardingPageInfo(
-                        title: 'Ative as\nnotificações',
-                        description:
-                            'Para receber avisos importantes sobre os seus agendamentos.',
-                        imagePath: 'assets/onboarding/onboarding_1.svg',
-                      ),
-                    OnboardingPageInfo(
-                      title: 'Agende uma\nconsulta',
-                      description:
-                          'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
-                      imagePath: 'assets/onboarding/onboarding_2.svg',
-                    ),
-                  ];
-                  return PageView(
+        body: BlocBuilder<OnboardingPageCubit, OnboardingPageState>(
+          builder: (context, state) {
+            final pages = [
+              OnboardingPageInfo(
+                title: 'Seja bem-vindo(a)!',
+                description:
+                    'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
+                imagePath: 'assets/onboarding/onboarding_2.svg',
+              ),
+              if (state.showLocationPage)
+                OnboardingPageInfo(
+                  title: 'Acesso à\nlocalização',
+                  description:
+                      'Para facilitar a busca de profissionais em sua região',
+                  imagePath: 'assets/onboarding/onboarding_0.svg',
+                  onNextPressed: cubit.requestLocationPermission,
+                ),
+              if (state.showNotificationPage)
+                OnboardingPageInfo(
+                  title: 'Ative as\nnotificações',
+                  description:
+                      'Para receber avisos importantes sobre os seus agendamentos.',
+                  imagePath: 'assets/onboarding/onboarding_1.svg',
+                  //onNextPressed: cubit.requestNotificationPermission,
+                ),
+              OnboardingPageInfo(
+                title: 'Agende uma\nconsulta',
+                description:
+                    'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
+                imagePath: 'assets/onboarding/onboarding_2.svg',
+              ),
+            ];
+            return Column(
+              children: [
+                Expanded(
+                  child: PageView(
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
@@ -118,43 +120,44 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         page = p;
                       });
                     },
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 44),
-              child: Row(
-                children: [
-                  if (page > 0) ...[
-                    AppTextButton(
-                        label: 'Voltar',
-                        onPressed: () {
-                          _pageController.animateToPage(
-                            page - 1,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        }),
-                    const SizedBox(width: 16),
-                  ],
-                  Expanded(
-                    child: AppElevatedButton(
-                      label: 'Continuar',
-                      iconPath: 'assets/icons/arrow_right.svg',
-                      onPressed: () {
-                        _pageController.animateToPage(
-                          page + 1,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                    ),
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 44),
+                  child: Row(
+                    children: [
+                      if (page > 0) ...[
+                        AppTextButton(
+                            label: 'Voltar',
+                            onPressed: () {
+                              _pageController.animateToPage(
+                                page - 1,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
+                            }),
+                        const SizedBox(width: 16),
+                      ],
+                      Expanded(
+                        child: AppElevatedButton(
+                          label: 'Continuar',
+                          iconPath: 'assets/icons/arrow_right.svg',
+                          onPressed: () async {
+                            await pages[page].onNextPressed?.call();
+                            _pageController.animateToPage(
+                              page + 1,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -172,10 +175,12 @@ class OnboardingPageInfo {
   final String title;
   final String description;
   final String imagePath;
+  final Function? onNextPressed;
 
   OnboardingPageInfo({
     required this.title,
     required this.description,
     required this.imagePath,
+    this.onNextPressed,
   });
 }

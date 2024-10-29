@@ -17,8 +17,6 @@ class OnboardingPageCubit extends Cubit<OnboardingPageState> {
   Future<void> initialize() async {
     final locationStatus = await _appLocation.checkStatus();
     final messagingStatus = await _appMessaging.checkStatus();
-    print("LOCATION = $locationStatus");
-    print("MENSSAGE = $messagingStatus");
     emit(OnboardingPageState(
       showNotificationPage: [
         AppMessagingStatus.notDetermined,
@@ -30,4 +28,10 @@ class OnboardingPageCubit extends Cubit<OnboardingPageState> {
       ].contains(locationStatus),
     ));
   }
+
+  Future<void> requestLocationPermission() async {
+    await _appLocation.requestPermssion();
+  }
+
+  //Future<void> requestNotificationPermission() async {}
 }

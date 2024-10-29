@@ -7,7 +7,20 @@ class AppLocation {
     final isEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isEnabled) return AppLocationStatus.disabled;
     final permission = await Geolocator.checkPermission();
-    switch (permission) {
+    return permission.toApp();
+  }
+
+  Future<AppLocationStatus> requestPermssion() async {
+    final isEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isEnabled) return AppLocationStatus.disabled;
+    final permission = await Geolocator.requestPermission();
+    return permission.toApp();
+  }
+}
+
+extension LocationPermissionX on LocationPermission {
+  AppLocationStatus toApp() {
+    switch (this) {
       case LocationPermission.always:
       case LocationPermission.whileInUse:
         return AppLocationStatus.allowed;
