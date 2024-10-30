@@ -21,13 +21,16 @@ class AppAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
-      child: Padding(
+      child: Container(
+        width: 400,
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.w700,
@@ -37,6 +40,7 @@ class AppAlertDialog extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               body,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
@@ -44,7 +48,10 @@ class AppAlertDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            ...actions,
+            for (final a in actions) ...[
+              a,
+              if (actions.last != a) const SizedBox(height: 10),
+            ],
           ],
         ),
       ),

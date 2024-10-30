@@ -1,5 +1,6 @@
 import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/core/widgets/app_alert_dialog.dart';
+import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/cubit/onboarding_page_cubit.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
 import 'package:flutter/material.dart';
@@ -180,10 +181,14 @@ class _OnboardingPageState extends State<OnboardingPage>
               body:
                   'Você não autorizou esta permissão. Acesse as configurações dos seu dispositivo para permitir.',
               actions: <Widget>[
+                AppOutlinedButton(
+                  label: 'Continuar mesmo assim',
+                  onPressed: Navigator.of(context).pop,
+                ),
                 AppElevatedButton(
                   label: 'Ir para configurações',
                   onPressed: () {},
-                )
+                ),
               ],
             ));
   }
