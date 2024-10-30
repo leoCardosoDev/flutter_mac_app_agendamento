@@ -5,15 +5,13 @@ import 'package:app_agendamento/core/widgets/app_alert_dialog.dart';
 import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/cubit/onboarding_page_cubit.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
+import 'package:app_agendamento/features/intro/widgets/intro_base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
 import 'package:app_agendamento/core/widgets/app_text_button.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../core/theme/app_theme.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -36,7 +34,6 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
     return BlocProvider.value(
       value: cubit,
       child: Scaffold(
@@ -45,7 +42,7 @@ class _OnboardingPageState extends State<OnboardingPage>
             final pages = [
               OnboardingPageInfo(
                 title: 'Seja bem-vindo(a)!',
-                description:
+                body:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
                 imagePath: 'assets/intro/onboarding_2.svg',
                 nextButtonLabel: 'Vamos começar?',
@@ -53,22 +50,21 @@ class _OnboardingPageState extends State<OnboardingPage>
               if (state.showLocationPage)
                 OnboardingPageInfo(
                   title: 'Acesso à\nlocalização',
-                  description:
-                      'Para facilitar a busca de profissionais em sua região',
+                  body: 'Para facilitar a busca de profissionais em sua região',
                   imagePath: 'assets/intro/onboarding_0.svg',
                   onNextPressed: cubit.requestLocationPermission,
                 ),
               if (state.showNotificationPage)
                 OnboardingPageInfo(
                   title: 'Ative as\nnotificações',
-                  description:
+                  body:
                       'Para receber avisos importantes sobre os seus agendamentos.',
                   imagePath: 'assets/intro/onboarding_1.svg',
                   onNextPressed: cubit.requestNotificationPermission,
                 ),
               OnboardingPageInfo(
                 title: 'Agende uma\nconsulta',
-                description:
+                body:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
                 imagePath: 'assets/intro/onboarding_2.svg',
                 onNextPressed: cubit.finish,
@@ -83,47 +79,10 @@ class _OnboardingPageState extends State<OnboardingPage>
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       for (final p in pages)
-                        Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: SvgPicture.asset(p.imagePath)),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: Text(
-                                        p.title,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 36,
-                                          fontWeight: FontWeight.w700,
-                                          color: theme.black,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 25),
-                                    SizedBox(
-                                      width: 300,
-                                      child: Text(
-                                        p.description,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                        IntroBasePage(
+                          title: p.title,
+                          body: p.body,
+                          imagePath: p.imagePath,
                         ),
                     ],
                     onPageChanged: (p) {
@@ -214,14 +173,14 @@ class _OnboardingPageState extends State<OnboardingPage>
 
 class OnboardingPageInfo {
   final String title;
-  final String description;
+  final String body;
   final String imagePath;
   final Function? onNextPressed;
   final String? nextButtonLabel;
 
   OnboardingPageInfo({
     required this.title,
-    required this.description,
+    required this.body,
     required this.imagePath,
     this.onNextPressed,
     this.nextButtonLabel,
