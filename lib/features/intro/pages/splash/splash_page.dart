@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToHome() {
-    context.go(AppRoutes.auth);
+    context.go(AppRoutes.home);
   }
 
   @override
