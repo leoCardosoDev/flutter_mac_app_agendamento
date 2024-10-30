@@ -1,3 +1,5 @@
+import 'package:app_agendamento/core/device/app_external_launcher.dart';
+import 'package:app_agendamento/core/di/di.dart';
 import 'package:app_agendamento/features/intro/widgets/intro_base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +26,9 @@ class MaintenancePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    getIt<AppExternalLauncher>().launchUrl('https://x.com');
+                  },
                   child: SvgPicture.asset('assets/social/twitter.svg'),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/device/app_device_settings.dart';
+import 'package:app_agendamento/core/device/app_external_launcher.dart';
 import 'package:app_agendamento/core/device/app_location.dart';
 import 'package:app_agendamento/core/device/app_package_info.dart';
 import 'package:app_agendamento/core/device/app_preferences.dart';
@@ -51,4 +52,5 @@ Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerFactory(() => AppPackageInfo());
   getIt.registerFactory(() => AppLocation());
   getIt.registerFactory(() => AppDeviceSettings());
+  getIt.registerFactory(() => AppExternalLauncher());
 }

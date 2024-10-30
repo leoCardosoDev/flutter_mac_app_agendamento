@@ -31,7 +31,7 @@ class IntroBasePage extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: 30,
                       fontWeight: FontWeight.w700,
                       color: theme.black,
                     ),
