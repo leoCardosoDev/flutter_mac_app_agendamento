@@ -54,7 +54,7 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToMaintanence() {
-    context.go('/maintanence');
+    context.go(AppRoutes.maintenance);
   }
 
   @override
