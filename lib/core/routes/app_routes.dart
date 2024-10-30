@@ -1,3 +1,4 @@
+import 'package:app_agendamento/features/intro/pages/force_update/force_update_page.dart';
 import 'package:app_agendamento/features/intro/pages/maintenance/maintenance_page.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page.dart';
@@ -24,6 +25,10 @@ final router = GoRouter(
       path: AppRoutes.maintenance,
       builder: (context, state) => const MaintenancePage(),
     ),
+    GoRoute(
+      path: AppRoutes.forceUpdate,
+      builder: (context, state) => const ForceUpdatePage(),
+    ),
   ],
 );
 
@@ -32,4 +37,5 @@ class AppRoutes {
   static String get onboarding => '/onboarding';
   static String get auth => '/auth';
   static String get maintenance => '/maintenance';
+  static String get forceUpdate => '/force-update';
 }

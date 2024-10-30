@@ -74,7 +74,7 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToForceUpadte() {
-    context.go('/force-upadte');
+    context.go(AppRoutes.forceUpdate);
   }
 
   @override
