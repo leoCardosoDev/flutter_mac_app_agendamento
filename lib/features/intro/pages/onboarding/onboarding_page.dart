@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/routes/app_routes.dart';
+import 'package:app_agendamento/core/widgets/app_alert_dialog.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/cubit/onboarding_page_cubit.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                 title: 'Seja bem-vindo(a)!',
                 description:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
-                imagePath: 'assets/onboarding/onboarding_2.svg',
+                imagePath: 'assets/intro/onboarding_2.svg',
                 nextButtonLabel: 'Vamos começar?',
               ),
               if (state.showLocationPage)
@@ -51,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                   title: 'Acesso à\nlocalização',
                   description:
                       'Para facilitar a busca de profissionais em sua região',
-                  imagePath: 'assets/onboarding/onboarding_0.svg',
+                  imagePath: 'assets/intro/onboarding_0.svg',
                   onNextPressed: cubit.requestLocationPermission,
                 ),
               if (state.showNotificationPage)
@@ -59,14 +60,14 @@ class _OnboardingPageState extends State<OnboardingPage>
                   title: 'Ative as\nnotificações',
                   description:
                       'Para receber avisos importantes sobre os seus agendamentos.',
-                  imagePath: 'assets/onboarding/onboarding_1.svg',
+                  imagePath: 'assets/intro/onboarding_1.svg',
                   onNextPressed: cubit.requestNotificationPermission,
                 ),
               OnboardingPageInfo(
                 title: 'Agende uma\nconsulta',
                 description:
                     'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques',
-                imagePath: 'assets/onboarding/onboarding_2.svg',
+                imagePath: 'assets/intro/onboarding_2.svg',
                 onNextPressed: cubit.finish,
                 nextButtonLabel: 'Finalizar',
               ),
@@ -174,12 +175,16 @@ class _OnboardingPageState extends State<OnboardingPage>
   Future<void> showDeniedForeverDialog() {
     return showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-              content: Container(
-                color: Colors.red,
-                width: 100,
-                height: 100,
-              ),
+        builder: (_) => AppAlertDialog(
+              title: 'Autorização Negada',
+              body:
+                  'Você não autorizou esta permissão. Acesse as configurações dos seu dispositivo para permitir.',
+              actions: <Widget>[
+                AppElevatedButton(
+                  label: 'Ir para configurações',
+                  onPressed: () {},
+                )
+              ],
             ));
   }
 
