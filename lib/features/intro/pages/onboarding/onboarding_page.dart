@@ -1,3 +1,5 @@
+import 'package:app_agendamento/core/device/app_device_settings.dart';
+import 'package:app_agendamento/core/di/di.dart';
 import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/core/widgets/app_alert_dialog.dart';
 import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
@@ -187,7 +189,10 @@ class _OnboardingPageState extends State<OnboardingPage>
                 ),
                 AppElevatedButton(
                   label: 'Ir para configurações',
-                  onPressed: () {},
+                  onPressed: () async {
+                    await getIt<AppDeviceSettings>().openSettings();
+                    if (mounted) Navigator.of(context).pop();
+                  },
                 ),
               ],
             ));
