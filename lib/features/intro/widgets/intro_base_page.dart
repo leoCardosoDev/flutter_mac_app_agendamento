@@ -21,7 +21,7 @@ class IntroBasePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(flex: 2, child: SvgPicture.asset(imagePath)),
+          Expanded(flex: 2, child: Center(child: SvgPicture.asset(imagePath))),
           Expanded(
             child: Column(
               children: [
@@ -37,7 +37,7 @@ class IntroBasePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
                 SizedBox(
                   width: 300,
                   child: Text(

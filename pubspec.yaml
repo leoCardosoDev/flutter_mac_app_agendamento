@@ -28,7 +28,6 @@ dependencies:
   flutter_svg: ^2.0.10+1
   device_preview: ^1.2.0
   geolocator: ^13.0.1
-  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   flutter_test:
