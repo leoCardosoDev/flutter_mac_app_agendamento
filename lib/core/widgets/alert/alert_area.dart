@@ -1,4 +1,8 @@
+import 'package:app_agendamento/core/di/di.dart';
+import 'package:app_agendamento/core/widgets/alert/alert_widget.dart';
+import 'package:app_agendamento/core/widgets/alert/cubit/alert_area_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AlertArea extends StatefulWidget {
   const AlertArea({super.key});
@@ -10,24 +14,28 @@ class AlertArea extends StatefulWidget {
 class _AlertAreaState extends State<AlertArea> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Material(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xffc3e9e9),
-              borderRadius: BorderRadius.circular(9),
-            ),
-            padding: const EdgeInsets.all(24),
-            child: const Row(
-              children: [
-                Expanded(child: Text('Este é um alerta de texto')),
-                Icon(
-                  Icons.check_circle_outline_outlined,
-                  color: Color(0xff1EE0CC),
-                )
-              ],
+    return BlocProvider.value(
+      value: getIt<AlertAreaCubit>(),
+      child: SafeArea(
+        child: Material(
+          type: MaterialType.transparency,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: BlocBuilder<AlertAreaCubit, AlertAreaState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    for (final a in state.alerts) ...[
+                      AlertWidget(
+                        alert: a,
+                        key: ObjectKey(a),
+                      ),
+                      if (state.alerts.indexOf(a) < state.alerts.length - 1)
+                        const SizedBox(height: 8),
+                    ],
+                  ],
+                );
+              },
             ),
           ),
         ),
