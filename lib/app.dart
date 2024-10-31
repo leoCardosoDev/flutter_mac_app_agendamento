@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/theme/app_theme.dart';
+import 'package:app_agendamento/core/widgets/alert/alert_area.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ Future<void> bootstrap(FlavorConfig config) async {
   await configureDependencies(config);
   runApp(DevicePreview(
     builder: (_) => const App(),
-    enabled: true, // TODO: mudar para:config.flavor == AppFlavor.prod
+    enabled: config.flavor == AppFlavor.prod, // TODO: mudar para: dev
   ));
 }
 
@@ -38,10 +39,19 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         routerConfig: router,
         locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
         theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor: Colors.white,
-            textButtonTheme: const TextButtonThemeData()),
+          scaffoldBackgroundColor: Colors.white,
+          textButtonTheme: const TextButtonThemeData(),
+        ),
+        builder: (context, child) {
+          final newChild = Stack(
+            children: [
+              if (child != null) child,
+              const AlertArea(),
+            ],
+          );
+          return DevicePreview.appBuilder(context, newChild);
+        },
       ),
     );
   }
