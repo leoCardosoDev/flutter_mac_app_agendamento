@@ -7,6 +7,7 @@ import 'package:app_agendamento/core/device/app_secure_storage.dart';
 import 'package:app_agendamento/core/firebase/crashlytics/app_crashlytics.dart';
 import 'package:app_agendamento/core/firebase/messaging/app_messaging.dart';
 import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.dart';
+import 'package:app_agendamento/core/widgets/alert/cubit/alert_area_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -40,6 +41,8 @@ Future<void> configureDependencies(FlavorConfig config) async {
 
   getIt.registerFactory(() => const FlutterSecureStorage());
   getIt.registerFactory(() => AppSecureStorage(getIt()));
+
+  getIt.registerLazySingleton(() => AlertAreaCubit());
 
   getIt.registerFactory<AuthDataSource>(() => RemoteAuthDataSource(getIt()));
   getIt.registerLazySingleton(() => AuthRepository(getIt(), getIt()));
