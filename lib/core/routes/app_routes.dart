@@ -1,3 +1,4 @@
+import 'package:app_agendamento/features/auth/pages/auth/auth_page.dart';
 import 'package:app_agendamento/features/intro/pages/force_update/force_update_page.dart';
 import 'package:app_agendamento/features/intro/pages/maintenance/maintenance_page.dart';
 import 'package:app_agendamento/features/intro/pages/not_found/not_found_page.dart';
@@ -24,7 +25,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.auth,
-      builder: (context, state) => Container(color: Colors.redAccent),
+      builder: (context, state) => const AuthPage(),
     ),
     GoRoute(
       path: AppRoutes.home,
