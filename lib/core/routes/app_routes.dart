@@ -1,4 +1,5 @@
 import 'package:app_agendamento/features/auth/pages/auth/auth_page.dart';
+import 'package:app_agendamento/features/auth/pages/signup/signup_page.dart';
 import 'package:app_agendamento/features/intro/pages/force_update/force_update_page.dart';
 import 'package:app_agendamento/features/intro/pages/maintenance/maintenance_page.dart';
 import 'package:app_agendamento/features/intro/pages/not_found/not_found_page.dart';
@@ -29,7 +30,7 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: AppRoutes.signUp.path,
-          builder: (context, state) => Container(),
+          builder: (context, state) => const SignupPage(),
         )
       ],
     ),
