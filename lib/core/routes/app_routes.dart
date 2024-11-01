@@ -26,6 +26,12 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.auth,
       builder: (context, state) => const AuthPage(),
+      routes: [
+        GoRoute(
+          path: AppRoutes.signUp.path,
+          builder: (context, state) => Container(),
+        )
+      ],
     ),
     GoRoute(
       path: AppRoutes.home,
@@ -49,4 +55,12 @@ class AppRoutes {
   static String get auth => '/auth';
   static String get maintenance => '/maintenance';
   static String get forceUpdate => '/force-update';
+  static AppRoute get signUp =>
+      const AppRoute(fullPath: '/auth/signup', path: 'signup');
+}
+
+class AppRoute {
+  final String fullPath;
+  final String path;
+  const AppRoute({required this.fullPath, required this.path});
 }
