@@ -38,7 +38,8 @@ class AppBasePage extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Card(
                 color: theme.bg,
-                elevation: 8,
+                elevation: 4,
+                shadowColor: theme.lightGray,
                 margin: EdgeInsets.zero,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(

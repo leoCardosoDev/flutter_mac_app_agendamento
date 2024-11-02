@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../theme/app_theme.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextField extends StatefulWidget {
   final String title;
   final String hint;
   final String? initialText;
@@ -24,6 +24,12 @@ class AppTextField extends StatelessWidget {
   });
 
   @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState extends State<AppTextField> {
+  bool hidePassword = true;
+  @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return Container(
@@ -31,32 +37,60 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         color: theme.lightGray,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 8),
-            child: Text(
-              title,
-              style: theme.label11Bold,
-              textAlign: TextAlign.start,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 8),
+                  child: Text(
+                    widget.title,
+                    style: theme.label11Bold,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                TextFormField(
+                  initialValue: widget.initialText,
+                  obscureText: widget.obscure && hidePassword,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.fromLTRB(20, 6, 20, 15),
+                    isCollapsed: true,
+                    hintText: widget.hint,
+                    hintStyle: theme.field15.copyWith(color: theme.gray),
+                  ),
+                  style: theme.field15,
+                  onChanged: widget.onChanged,
+                  keyboardType: widget.textInputType,
+                  inputFormatters: widget.inputFormartters,
+                ),
+              ],
             ),
           ),
-          TextFormField(
-            initialValue: initialText,
-            obscureText: obscure,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.fromLTRB(20, 6, 20, 15),
-              isCollapsed: true,
-              hintText: hint,
-              hintStyle: theme.field15.copyWith(color: theme.gray),
+          if (widget.obscure)
+            SizedBox(
+              width: 48,
+              height: 48,
+              child: Material(
+                type: MaterialType.transparency,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      hidePassword = !hidePassword;
+                    });
+                  },
+                  icon: Icon(
+                    hidePassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  color: theme.gray,
+                ),
+              ),
             ),
-            style: theme.field15,
-            onChanged: onChanged,
-            keyboardType: textInputType,
-            inputFormatters: inputFormartters,
-          ),
         ],
       ),
     );
