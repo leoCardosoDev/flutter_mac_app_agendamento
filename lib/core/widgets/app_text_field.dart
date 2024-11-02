@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../theme/app_theme.dart';
@@ -10,6 +11,7 @@ class AppTextField extends StatelessWidget {
   final Function(String) onChanged;
   final TextInputType? textInputType;
   final bool obscure;
+  final List<TextInputFormatter>? inputFormartters;
   const AppTextField({
     super.key,
     required this.title,
@@ -17,6 +19,7 @@ class AppTextField extends StatelessWidget {
     required this.onChanged,
     this.textInputType,
     this.initialText,
+    this.inputFormartters,
     this.obscure = false,
   });
 
@@ -52,6 +55,7 @@ class AppTextField extends StatelessWidget {
             style: theme.field15,
             onChanged: onChanged,
             keyboardType: textInputType,
+            inputFormatters: inputFormartters,
           ),
         ],
       ),

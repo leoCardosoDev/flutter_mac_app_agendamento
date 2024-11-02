@@ -34,18 +34,25 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (_) => AppTheme(),
+    final theme = AppTheme();
+    return RepositoryProvider.value(
+      value: theme,
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: router,
         locale: DevicePreview.locale(context),
         theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor: Colors.white,
-            textButtonTheme: const TextButtonThemeData(),
-            buttonTheme: const ButtonThemeData(
-              buttonColor: Colors.transparent,
-            )),
+          scaffoldBackgroundColor: Colors.white,
+          textButtonTheme: const TextButtonThemeData(),
+          buttonTheme: const ButtonThemeData(
+            buttonColor: Colors.transparent,
+          ),
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: theme.primary,
+            selectionHandleColor: theme.primary,
+            selectionColor: theme.primary.withOpacity(0.3),
+          ),
+        ),
         builder: (context, child) {
           final newChild = Stack(
             children: [
