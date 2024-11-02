@@ -1,4 +1,5 @@
 import 'package:app_agendamento/core/theme/app_theme.dart';
+import 'package:app_agendamento/core/utils/no_glow_behavior.dart';
 import 'package:app_agendamento/core/widgets/alert/alert_area.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +55,14 @@ class _AppState extends State<App> {
           ),
         ),
         builder: (context, child) {
-          final newChild = Stack(
-            children: [
-              if (child != null) child,
-              const AlertArea(),
-            ],
+          final newChild = ScrollConfiguration(
+            behavior: NoGlowBehavior(),
+            child: Stack(
+              children: [
+                if (child != null) child,
+                const AlertArea(),
+              ],
+            ),
           );
           return DevicePreview.appBuilder(context, newChild);
         },
