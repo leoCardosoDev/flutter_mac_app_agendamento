@@ -21,7 +21,7 @@ class SignupState extends Equatable {
         password = const Password.pure();
 
   @override
-  List<Object> get props => [fullName];
+  List<Object> get props => [fullName, cpf, cellPhone, email, password];
 
   SignupState copyWith({
     FullName? fullName,
