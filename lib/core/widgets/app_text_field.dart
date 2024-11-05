@@ -12,16 +12,17 @@ class AppTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final bool obscure;
   final List<TextInputFormatter>? inputFormartters;
-  const AppTextField({
-    super.key,
-    required this.title,
-    required this.hint,
-    required this.onChanged,
-    this.textInputType,
-    this.initialText,
-    this.inputFormartters,
-    this.obscure = false,
-  });
+  final String? error;
+  const AppTextField(
+      {super.key,
+      required this.title,
+      required this.hint,
+      required this.onChanged,
+      this.textInputType,
+      this.initialText,
+      this.inputFormartters,
+      this.obscure = false,
+      this.error});
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -44,11 +45,25 @@ class _AppTextFieldState extends State<AppTextField> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 8),
-                  child: Text(
-                    widget.title,
-                    style: theme.label11Bold,
-                    textAlign: TextAlign.start,
+                  padding: const EdgeInsets.only(left: 20, top: 8, right: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        widget.title,
+                        style: theme.label11Bold,
+                        textAlign: TextAlign.start,
+                      ),
+                      if (widget.error != null)
+                        Expanded(
+                            child: Text(
+                          widget.error!,
+                          textAlign: TextAlign.end,
+                          style: theme.label11.copyWith(
+                            color: theme.red,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ))
+                    ],
                   ),
                 ),
                 TextFormField(
