@@ -6,6 +6,7 @@ class SignupState extends Equatable {
   final CellPhone cellPhone;
   final Email email;
   final Password password;
+
   const SignupState({
     required this.fullName,
     required this.cpf,
@@ -19,6 +20,14 @@ class SignupState extends Equatable {
         cellPhone = const CellPhone.pure(),
         email = const Email.pure(),
         password = const Password.pure();
+
+  bool get isValid => Formz.validate([
+        fullName,
+        cpf,
+        cellPhone,
+        email,
+        password,
+      ]);
 
   @override
   List<Object> get props => [fullName, cpf, cellPhone, email, password];

@@ -22,7 +22,7 @@ class _SignupPageState extends State<SignupPage> {
     final AppTheme theme = context.watch();
     return BlocProvider(
       create: (context) => SignupCubit(),
-      child: Builder(builder: (context) {
+      child: BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
         return AppBasePage(
           title: 'Criar conta',
           body: Column(
@@ -79,7 +79,8 @@ class _SignupPageState extends State<SignupPage> {
                 onChanged: context.read<SignupCubit>().onPasswordChanged,
               ),
               const SizedBox(height: 24),
-              AppElevatedButton(label: 'Cadatrar', onPressed: () {})
+              AppElevatedButton(
+                  label: 'Cadatrar', onPressed: state.isValid ? () {} : null)
             ],
           ),
         );
