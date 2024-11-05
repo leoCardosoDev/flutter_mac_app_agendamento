@@ -31,4 +31,10 @@ class SignupCubit extends Cubit<SignupState> {
   void onPasswordChanged(String s) {
     emit(state.copyWith(password: Password.dirty(s)));
   }
+
+  Future<void> onSignUpPressed() async {
+    emit(state.copyWith(isLoading: true));
+    await Future.delayed(const Duration(seconds: 3));
+    emit(state.copyWith(isLoading: false));
+  }
 }

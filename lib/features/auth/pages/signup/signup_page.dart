@@ -30,6 +30,7 @@ class _SignupPageState extends State<SignupPage> {
       child: BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
         return AppBasePage(
           title: 'Criar conta',
+          isLoading: state.isLoading,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -113,7 +114,10 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 24),
               AppElevatedButton(
-                  label: 'Cadatrar', onPressed: state.isValid ? () {} : null)
+                  label: 'Cadatrar',
+                  onPressed: state.isValid
+                      ? context.read<SignupCubit>().onSignUpPressed
+                      : null)
             ],
           ),
         );
