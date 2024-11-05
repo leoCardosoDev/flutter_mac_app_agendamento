@@ -32,6 +32,7 @@ dependencies:
   store_redirect: ^2.0.3
   brasil_fields: ^1.15.0
   formz: ^0.8.0
+  email_validator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
