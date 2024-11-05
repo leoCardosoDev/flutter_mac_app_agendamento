@@ -69,7 +69,7 @@ class _SignupPageState extends State<SignupPage> {
                 title: 'E-mail',
                 hint: 'Informe o e-mail',
                 textInputType: TextInputType.emailAddress,
-                onChanged: (t) {},
+                onChanged: context.read<SignupCubit>().onEmailChanged,
               ),
               const SizedBox(height: 24),
               AppTextField(
