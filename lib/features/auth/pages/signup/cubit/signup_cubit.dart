@@ -1,3 +1,4 @@
+import 'package:app_agendamento/features/auth/models/cell_phone.dart';
 import 'package:app_agendamento/features/auth/models/cpf.dart';
 import 'package:app_agendamento/features/auth/models/full_name.dart';
 import 'package:bloc/bloc.dart';
@@ -14,5 +15,9 @@ class SignupCubit extends Cubit<SignupState> {
 
   void onCpfChanged(String s) {
     emit(state.copyWith(cpf: Cpf.dirty(s)));
+  }
+
+  void onCellPhoneChanged(String s) {
+    emit(state.copyWith(cellPhone: CellPhone.dirty(s)));
   }
 }

@@ -62,7 +62,7 @@ class _SignupPageState extends State<SignupPage> {
                   FilteringTextInputFormatter.digitsOnly,
                   TelefoneInputFormatter()
                 ],
-                onChanged: (t) {},
+                onChanged: context.read<SignupCubit>().onCellPhoneChanged,
               ),
               const SizedBox(height: 24),
               AppTextField(
