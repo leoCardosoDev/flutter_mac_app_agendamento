@@ -76,7 +76,7 @@ class _SignupPageState extends State<SignupPage> {
                 title: 'Senha',
                 hint: 'Informe a senha',
                 obscure: true,
-                onChanged: (t) {},
+                onChanged: context.read<SignupCubit>().onPasswordChanged,
               ),
               const SizedBox(height: 24),
               AppElevatedButton(label: 'Cadatrar', onPressed: () {})
