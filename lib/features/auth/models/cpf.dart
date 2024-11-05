@@ -11,7 +11,7 @@ class Cpf extends FormzInput<String, CpfValidationError> {
   CpfValidationError? validator(String value) {
     if (value.isEmpty) {
       return CpfValidationError.empty;
-    } else if (CPFValidator.isValid(value)) {
+    } else if (!CPFValidator.isValid(value)) {
       return CpfValidationError.invalid;
     }
     return null;
