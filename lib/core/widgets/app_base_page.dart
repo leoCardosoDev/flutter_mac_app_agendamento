@@ -134,4 +134,10 @@ class _AppBasePageState extends State<AppBasePage>
       ),
     );
   }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }

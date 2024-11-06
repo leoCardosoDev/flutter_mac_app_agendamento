@@ -67,6 +67,7 @@ class SplashPageCubit extends Cubit<SplashPageState> {
 
   Future<bool> _checkLoggedUser() async {
     final result = _authRepository.validateToken();
+    print(result);
     return result is Success;
   }
 
