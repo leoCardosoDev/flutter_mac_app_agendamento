@@ -19,6 +19,7 @@ class AuthRepository {
     final result = await _dataSource.login(email: email, password: password);
     if (result case Success(object: final user)) {
       this.user = user;
+      await _appSecureStorage.saveSessionToken(user.token);
     }
     return result;
   }
@@ -39,6 +40,7 @@ class AuthRepository {
     final result = await _dataSource.signUp(signUpDto);
     if (result case Success(object: final user)) {
       this.user = user;
+      await _appSecureStorage.saveSessionToken(user.token);
     }
     return result;
   }
