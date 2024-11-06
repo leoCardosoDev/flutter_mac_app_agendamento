@@ -1,3 +1,4 @@
+import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:app_agendamento/core/widgets/app_base_page.dart';
 import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
@@ -9,10 +10,12 @@ import 'package:app_agendamento/features/auth/models/email.dart';
 import 'package:app_agendamento/features/auth/models/full_name.dart';
 import 'package:app_agendamento/features/auth/models/password.dart';
 import 'package:app_agendamento/features/auth/pages/signup/cubit/signup_cubit.dart';
+import 'package:app_agendamento/features/auth/pages/signup/signup_actions.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -21,12 +24,12 @@ class SignupPage extends StatefulWidget {
   State<SignupPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends State<SignupPage> implements SignupActions {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return BlocProvider(
-      create: (context) => SignupCubit(),
+      create: (context) => SignupCubit(this),
       child: BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
         return AppBasePage(
           title: 'Criar conta',
@@ -116,12 +119,20 @@ class _SignupPageState extends State<SignupPage> {
               AppElevatedButton(
                   label: 'Cadatrar',
                   onPressed: state.isValid
-                      ? context.read<SignupCubit>().onSignUpPressed
+                      ? () {
+                          FocusScope.of(context).unfocus();
+                          context.read<SignupCubit>().onSignUpPressed();
+                        }
                       : null)
             ],
           ),
         );
       }),
     );
+  }
+
+  @override
+  void navToHome() {
+    context.go(AppRoutes.home);
   }
 }

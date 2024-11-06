@@ -1,10 +1,4 @@
 class SignUpDto {
-  final String fullName;
-  final String cpf;
-  final String cellPhone;
-  final String email;
-  final String password;
-
   const SignUpDto({
     required this.fullName,
     required this.cpf,
@@ -13,9 +7,15 @@ class SignUpDto {
     required this.password,
   });
 
+  final String fullName;
+  final String cpf;
+  final String cellPhone;
+  final String email;
+  final String password;
+
   Map<String, dynamic> toJson() {
     return {
-      'fullName': fullName,
+      'fullname': fullName,
       'document': cpf,
       'phone': cellPhone,
       'email': email,

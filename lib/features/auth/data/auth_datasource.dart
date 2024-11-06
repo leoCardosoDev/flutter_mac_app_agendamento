@@ -19,6 +19,16 @@ class RemoteAuthDataSource implements AuthDataSource {
   RemoteAuthDataSource(this._dio);
 
   @override
+  Future<Result<SignUpFailed, User>> signUp(SignUpDto signUpDto) async {
+    try {
+      final response = await _dio.post('/v1-sign-up', data: signUpDto.toJson());
+      return Success(User.fromJson(response.data['result']));
+    } catch (_) {
+      return const Failure(SignUpFailed.unknownError);
+    }
+  }
+
+  @override
   Future<Result<LoginFailed, User>> login(
       {required String email, required String password}) async {
     try {
@@ -49,16 +59,6 @@ class RemoteAuthDataSource implements AuthDataSource {
       return const Failure(ValidateTokenFailed.invalidToken);
     } catch (_) {
       return const Failure(ValidateTokenFailed.unknownError);
-    }
-  }
-
-  @override
-  Future<Result<SignUpFailed, User>> signUp(SignUpDto signUpDto) async {
-    try {
-      final response = await _dio.post('/v1-sign-up', data: signUpDto.toJson());
-      return Success(User.fromJson(response.data['result']));
-    } catch (_) {
-      return const Failure(SignUpFailed.unknownError);
     }
   }
 }
