@@ -1,3 +1,4 @@
+import 'package:app_agendamento/core/routes/app_routes.dart';
 import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:app_agendamento/core/widgets/app_base_page.dart';
 import 'package:app_agendamento/core/widgets/app_elevated_button.dart';
@@ -5,9 +6,11 @@ import 'package:app_agendamento/core/widgets/app_logo.dart';
 import 'package:app_agendamento/core/widgets/app_text_field.dart';
 import 'package:app_agendamento/features/auth/models/email.dart';
 import 'package:app_agendamento/features/auth/models/password.dart';
+import 'package:app_agendamento/features/auth/pages/login/login_page_actions.dart';
 import 'package:app_agendamento/features/auth/pages/login/login_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,12 +19,12 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> implements LoginPageActions {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return BlocProvider(
-      create: (context) => LoginPageCubit(),
+      create: (context) => LoginPageCubit(this),
       child: BlocBuilder<LoginPageCubit, LoginPageState>(
           builder: (context, state) {
         return AppBasePage(
@@ -74,5 +77,10 @@ class _LoginPageState extends State<LoginPage> {
         );
       }),
     );
+  }
+
+  @override
+  void navToHome() {
+    context.go(AppRoutes.home);
   }
 }
