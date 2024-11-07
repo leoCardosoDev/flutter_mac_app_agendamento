@@ -28,11 +28,11 @@ Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerSingleton(config);
   getIt.registerSingleton(Dio(BaseOptions(baseUrl: config.baseUrl, headers: {
     'X-Parse-Application-Id': config.appId,
-    'X-Parse-REST-API-Key': config.apiKey
+    'X-Parse-REST-API-Key': config.restKey
   }))
     ..interceptors.addAll([
       TokenInterceptor(),
-      if (config.flavor == AppFlavor.dev)
+      if (config.flavor == AppFlavor.prod) // TODO: mudar para dev
         PrettyDioLogger(requestHeader: true, requestBody: true)
     ]));
   final preferences = await SharedPreferences.getInstance();

@@ -35,7 +35,7 @@ class SplashPageCubit extends Cubit<SplashPageState> {
       Future.delayed(const Duration(seconds: 2)),
     ]);
     final appStatus = results[0];
-    if (_actions == null) return;
+
     if (appStatus == AppStatus.maintenance) {
       _actions?.navToMaintanence();
       return;
@@ -66,7 +66,7 @@ class SplashPageCubit extends Cubit<SplashPageState> {
   }
 
   Future<bool> _checkLoggedUser() async {
-    final result = _authRepository.validateToken();
+    final result = await _authRepository.validateToken();
     return result is Success;
   }
 

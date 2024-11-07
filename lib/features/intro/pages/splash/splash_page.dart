@@ -24,8 +24,8 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
     Future.delayed(Duration.zero).then((value) {
       setState(() {
-        logoAlignment = const Alignment(-0.28, 0);
-        titleAlignment = const Alignment(0.28, 0);
+        logoAlignment = const Alignment(-0.3, 0);
+        titleAlignment = const Alignment(0.3, 0);
       });
     });
   }

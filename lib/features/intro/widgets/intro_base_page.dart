@@ -1,6 +1,7 @@
 import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IntroBasePage extends StatelessWidget {
   final String imagePath;
@@ -15,7 +16,7 @@ class IntroBasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = AppTheme();
+    final AppTheme theme = context.watch();
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
