@@ -1,4 +1,5 @@
 import 'package:app_agendamento/features/auth/pages/auth/auth_page.dart';
+import 'package:app_agendamento/features/auth/pages/login/login_page.dart';
 import 'package:app_agendamento/features/auth/pages/signup/signup_page.dart';
 import 'package:app_agendamento/features/intro/pages/force_update/force_update_page.dart';
 import 'package:app_agendamento/features/intro/pages/maintenance/maintenance_page.dart';
@@ -31,7 +32,11 @@ final router = GoRouter(
         GoRoute(
           path: AppRoutes.signUp.path,
           builder: (context, state) => const SignupPage(),
-        )
+        ),
+        GoRoute(
+          path: AppRoutes.login.path,
+          builder: (context, state) => const LoginPage(),
+        ),
       ],
     ),
     GoRoute(
@@ -58,6 +63,8 @@ class AppRoutes {
   static String get forceUpdate => '/force-update';
   static AppRoute get signUp =>
       const AppRoute(fullPath: '/auth/signup', path: 'signup');
+  static AppRoute get login =>
+      const AppRoute(fullPath: '/auth/login', path: 'login');
 }
 
 class AppRoute {
