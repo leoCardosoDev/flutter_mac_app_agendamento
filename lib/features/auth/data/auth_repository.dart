@@ -1,5 +1,7 @@
 import 'package:app_agendamento/core/device/app_secure_storage.dart';
+import 'package:app_agendamento/features/auth/data/results/sign_up_failed_result.dart';
 import 'package:app_agendamento/features/auth/data/results/validate_token_failed_result.dart';
+import 'package:app_agendamento/features/auth/models/sign_up_dto.dart';
 
 import '../../../core/helpers/result.dart';
 import '../models/user.dart';
@@ -17,6 +19,7 @@ class AuthRepository {
     final result = await _dataSource.login(email: email, password: password);
     if (result case Success(object: final user)) {
       this.user = user;
+      await _appSecureStorage.saveSessionToken(user.token);
     }
     return result;
   }
@@ -29,6 +32,15 @@ class AuthRepository {
     final result = await _dataSource.validateToken(token);
     if (result case Success(object: final user)) {
       this.user = user;
+    }
+    return result;
+  }
+
+  Future<Result<SignUpFailed, User>> signUp(SignUpDto signUpDto) async {
+    final result = await _dataSource.signUp(signUpDto);
+    if (result case Success(object: final user)) {
+      this.user = user;
+      await _appSecureStorage.saveSessionToken(user.token);
     }
     return result;
   }

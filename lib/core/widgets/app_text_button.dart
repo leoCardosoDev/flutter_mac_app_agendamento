@@ -6,7 +6,13 @@ import '../theme/app_theme.dart';
 class AppTextButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
-  const AppTextButton({super.key, required this.label, this.onPressed});
+  final Color? color;
+  const AppTextButton({
+    super.key,
+    required this.label,
+    this.onPressed,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class AppTextButton extends StatelessWidget {
             if (states.contains(WidgetState.disabled)) {
               return theme.lightGray;
             }
-            return theme.black;
+            return color ?? theme.black;
           },
         ),
         padding: WidgetStateProperty.all(

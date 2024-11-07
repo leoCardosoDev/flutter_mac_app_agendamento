@@ -1,0 +1,1 @@
+enum SignUpFailed { unknownError }
