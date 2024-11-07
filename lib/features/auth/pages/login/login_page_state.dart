@@ -1,26 +1,30 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'login_page_cubit.dart';
 
-enum LoginPageStatus { initial, loading, failure, success }
-
 class LoginPageState extends Equatable {
-  final LoginPageStatus status;
-  final String email;
-  final String password;
-  const LoginPageState({ this.email = '', this.password = '', this.status = LoginPageStatus.initial });
+  final Email email;
+  final Password password;
+  final bool isLoading;
+
+  const LoginPageState({
+    required this.email,
+    required this.password,
+    required this.isLoading,
+  });
+
+  const LoginPageState.empty()
+      : email = const Email.pure(),
+        password = const Password.pure(validateLength: false),
+        isLoading = false;
+
+  bool get isValid => Formz.validate([email, password]);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [email, password, isLoading];
 
-  LoginPageState copyWith({
-    LoginPageStatus? status,
-    String? email,
-    String? password,
-  }) {
+  LoginPageState copyWith({Email? email, Password? password, bool? isLoading}) {
     return LoginPageState(
-      status: status ?? this.status,
-      email: email ?? this.email,
-      password: password ?? this.password,
-    );
+        email: email ?? this.email,
+        password: password ?? this.password,
+        isLoading: isLoading ?? this.isLoading);
   }
 }
