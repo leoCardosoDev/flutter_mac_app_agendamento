@@ -1,12 +1,12 @@
 import 'package:app_agendamento/features/auth/pages/auth/auth_page.dart';
 import 'package:app_agendamento/features/auth/pages/login/login_page.dart';
 import 'package:app_agendamento/features/auth/pages/signup/signup_page.dart';
+import 'package:app_agendamento/features/home/pages/home_page.dart';
 import 'package:app_agendamento/features/intro/pages/force_update/force_update_page.dart';
 import 'package:app_agendamento/features/intro/pages/maintenance/maintenance_page.dart';
 import 'package:app_agendamento/features/intro/pages/not_found/not_found_page.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -41,7 +41,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.home,
-      builder: (context, state) => Container(color: Colors.greenAccent),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: AppRoutes.maintenance,
